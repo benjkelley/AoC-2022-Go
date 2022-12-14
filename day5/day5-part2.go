@@ -80,14 +80,21 @@ func main() {
 				from_col, _ := strconv.Atoi(split_line[3])
 				to_col, _ := strconv.Atoi(split_line[5])
 
+				var holder []string
+
 				for i := 0; i < count; i++ {
 					//fmt.Printf("Loop %d, count %d", i, count)
 					temp, suc := stack_holder[from_col-1].Pop()
 					if suc == false {
 						fmt.Printf("ERROR: Stack %d Empty", from_col)
 					}
-					stack_holder[to_col-1].Push(temp)
+					holder = append(holder, temp)
 				}
+
+				for i := len(holder) - 1; i >= 0; i-- {
+					stack_holder[to_col-1].Push(holder[i])
+				}
+
 			}
 			diagram_counter++
 		}
